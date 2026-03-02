@@ -15,7 +15,7 @@
 
 
 <p align="center">
-  <img src="assets/pic_06.png" alt="MongoDB Sharded Cluster Architecture" width="700"/>
+  <img src="assets/pic_06.png" alt="MongoDB Sharded Cluster Architecture" />
 </p>
 
 
