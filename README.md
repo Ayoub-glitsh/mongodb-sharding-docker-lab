@@ -1,6 +1,5 @@
 
 
-* * *
 
    # 🧩 MongoDB Sharded Cluster Simulation with Docker
     
