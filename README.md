@@ -30,18 +30,21 @@
    # 🛠️ Stack Technique
     
    ## 🔧 Technologies Utilisées
+
+
+ 
+
+| Technologie | Rôle dans le Projet |
+|------------|--------------------|
+| <img src="https://cdn.simpleicons.org/docker" width="20" height="20"/> **Docker** | Conteneurisation des services |
+| <img src="https://cdn.simpleicons.org/docker" width="20" height="20"/> **Docker Compose** | Orchestration multi-conteneurs |
+| <img src="https://cdn.simpleicons.org/mongodb" width="20" height="20"/> **MongoDB 7** | Base de données NoSQL |
+| <img src="https://cdn.simpleicons.org/mongodb" width="20" height="20"/> **MongoDB Replica Sets** | Haute disponibilité |
+| <img src="https://cdn.simpleicons.org/mongodb" width="20" height="20"/> **MongoDB Sharding** | Scalabilité horizontale |
+| <img src="https://cdn.simpleicons.org/mongodb" width="20" height="20"/> **mongos** | Routeur du cluster |
+| <img src="https://cdn.simpleicons.org/mongodb" width="20" height="20"/> **mongosh** | Interface CLI MongoDB |
     
-    | Technologie | Rôle dans le Projet |
-    |------------|--------------------|
-    | 🐳 Docker | Conteneurisation des services |
-    | 🐳 Docker Compose | Orchestration multi-conteneurs |
-    | 🍃 MongoDB 7 | Base de données NoSQL |
-    | 🧠 MongoDB Replica Sets | Haute disponibilité |
-    | 🧩 MongoDB Sharding | Scalabilité horizontale |
-    | 📡 mongos | Routeur du cluster |
-    | 💻 mongosh | Interface CLI MongoDB |
-    
-    ---
+   ---
     
     ## 🏗️ Architecture du Cluster
     
