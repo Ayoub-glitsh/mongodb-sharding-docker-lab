@@ -124,25 +124,13 @@ Résultat : répartition automatique des données entre les shards.
 📊 Concepts Démontrés
 =====================
 
-Concept
 
-Explication
-
-Scalabilité horizontale
-
-Ajout de shards pour distribuer la charge
-
-Haute disponibilité
-
-Replica Sets avec Primary + Secondaries
-
-Partitionnement des données
-
-Distribution par clé de sharding
-
-Architecture distribuée
-
-Séparation Config / Shards / Router
+| Concept | Explication |
+|----------|------------|
+| 🚀 **Scalabilité horizontale** | Ajout de shards pour distribuer la charge et augmenter la capacité du système |
+| 🛡️ **Haute disponibilité** | Replica Sets avec un nœud Primary et plusieurs Secondaries pour assurer la tolérance aux pannes |
+| 🧩 **Partitionnement des données** | Distribution des données selon une clé de sharding |
+| 🌐 **Architecture distribuée** | Séparation des rôles entre Config Servers, Shards et mongos Router |
 
 * * *
 
