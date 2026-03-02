@@ -45,15 +45,14 @@
     
    ---
     
-    ## 🏗️ Architecture du Cluster
-    
-    | Composant | Nombre de nœuds | Port | Rôle |
-    |-----------|----------------|------|------|
-    | Config Servers (cfgRS) | 3 | 27019 | Stockage des métadonnées du cluster |
-    | Shard 1 (shard1RS) | 3 | 27018 | Données shard 1 |
-    | Shard 2 (shard2RS) | 3 | 27018 | Données shard 2 |
-    | mongos Router | 1 | 27017 | Point d’entrée du cluster |
-    
+## 🏗️ Architecture du Cluster
+
+| Composant | Nombre de nœuds | Port | Rôle |
+|-----------|----------------|------|------|
+| <img src="https://cdn.simpleicons.org/mongodb" width="20"/> **Config Servers (cfgRS)** | 3 | 27019 | Stockage des métadonnées du cluster |
+| <img src="https://cdn.simpleicons.org/mongodb" width="20"/> **Shard 1 (shard1RS)** | 3 | 27018 | Données shard 1 |
+| <img src="https://cdn.simpleicons.org/mongodb" width="20"/> **Shard 2 (shard2RS)** | 3 | 27018 | Données shard 2 |
+| <img src="https://cdn.simpleicons.org/nginx" width="20"/> **mongos Router** | 1 | 27017 | Point d’entrée du cluster |
     ---
     
     # 📦 Fonctionnalités Implémentées
