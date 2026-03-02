@@ -1,315 +1,187 @@
 
-   # 🧩 Simulation de Sharding MongoDB avec Docker
-    
-  Ce projet propose une **simulation pratique d’un cluster MongoDB shardé** en utilisant **Docker Compose**.  
-    Il reproduit une architecture proche de la production avec :
-    
-  - ✅ **2 shards**, chacun en **Replica Set (3 nœuds)**
-  - ✅ **Config Servers** en **Replica Set (3 nœuds)**
-  - ✅ **1 routeur mongos** (point d’entrée du cluster)
-  - ✅ Activation du sharding sur une base + collection
-  - ✅ Tests de distribution des données sur les shards
-    
-    ---
-    
-    ## 🎯 Objectifs pédagogiques
-    
-    - Comprendre le rôle de `mongos`, des `config servers` et des shards
-    - Mettre en place un cluster shardé avec Replica Sets
-    - Activer le sharding sur une base de données
-    - Sharder une collection et observer la distribution des documents
-    
-    ---
-    
-    ## 🏗️ Architecture du cluster
-    
-    ### Config Server Replica Set (cfgRS)
-    - `cfg1:27019`
-    - `cfg2:27019`
-    - `cfg3:27019`
-    
-    ### Shard 1 Replica Set (shard1RS)
-    - `shard1a:27018`
-    - `shard1b:27018`
-    - `shard1c:27018`
-    
-    ### Shard 2 Replica Set (shard2RS)
-    - `shard2a:27018`
-    - `shard2b:27018`
-    - `shard2c:27018`
-    
-    ### Router
-    - `mongos:27017` (exposé sur l’hôte : `localhost:27017`)
-    
-    ---
-    
-    ## ✅ Prérequis
-    
-    - Docker Desktop installé
-    - Docker Compose (inclus avec Docker Desktop)
-    - Un terminal (PowerShell / CMD / Terminal Linux/Mac)
-    
-    Vérification :
-    ```bash
-    docker --version
-    docker compose version
-    
 
 * * *
 
-🚀 Lancement rapide
--------------------
-
-### 1) Démarrer les conteneurs
-
-Dans le dossier du projet :
-
+   # 🧩 MongoDB Sharded Cluster Simulation with Docker
+    
+   Ce projet met en place une **simulation complète d’un cluster MongoDB shardé** en utilisant Docker Compose.  
+    Il reproduit une architecture distribuée proche d’un environnement de production avec :
+    
+   - 🔹 Config Servers en Replica Set
+   - 🔹 Deux Shards en Replica Sets
+   - 🔹 Un routeur mongos
+   - 🔹 Sharding activé sur une collection
+   - 🔹 Test de distribution des données
+    
+ ---
+    
+   # 🚀 Objectif du Projet
+    
+ Ce laboratoire a pour but de :
+    
+   - Comprendre le fonctionnement du **Sharding MongoDB**
+    - Implémenter des **Replica Sets**
+    - Simuler une **architecture distribuée**
+    - Expérimenter la **scalabilité horizontale**
+    - Observer la répartition des données entre plusieurs shards
+    
+    ---
+    
+   # 🛠️ Stack Technique
+    
+   ## 🔧 Technologies Utilisées
+    
+    | Technologie | Rôle dans le Projet |
+    |------------|--------------------|
+    | 🐳 Docker | Conteneurisation des services |
+    | 🐳 Docker Compose | Orchestration multi-conteneurs |
+    | 🍃 MongoDB 7 | Base de données NoSQL |
+    | 🧠 MongoDB Replica Sets | Haute disponibilité |
+    | 🧩 MongoDB Sharding | Scalabilité horizontale |
+    | 📡 mongos | Routeur du cluster |
+    | 💻 mongosh | Interface CLI MongoDB |
+    
+    ---
+    
+    ## 🏗️ Architecture du Cluster
+    
+    | Composant | Nombre de nœuds | Port | Rôle |
+    |-----------|----------------|------|------|
+    | Config Servers (cfgRS) | 3 | 27019 | Stockage des métadonnées du cluster |
+    | Shard 1 (shard1RS) | 3 | 27018 | Données shard 1 |
+    | Shard 2 (shard2RS) | 3 | 27018 | Données shard 2 |
+    | mongos Router | 1 | 27017 | Point d’entrée du cluster |
+    
+    ---
+    
+    # 📦 Fonctionnalités Implémentées
+    
+    | Fonctionnalité | Description |
+    |---------------|------------|
+    | Replica Sets | Chaque shard est configuré en Replica Set (3 membres) |
+    | Config Server RS | Replica Set dédié aux métadonnées |
+    | Ajout dynamique de shards | Utilisation de `sh.addShard()` |
+    | Activation du sharding | `sh.enableSharding()` |
+    | Sharding d’une collection | `sh.shardCollection()` |
+    | Test de distribution | `getShardDistribution()` |
+    
+    ---
+    
+    # ⚙️ Déploiement
+    
+    ## 1️⃣ Lancer le cluster
+    
+    ```bash
     docker compose up -d
     
 
-Vérifie que tout est lancé :
+Vérifier :
 
     docker ps
     
 
 * * *
 
-⚙️ Initialisation des Replica Sets
-----------------------------------
+2️⃣ Initialiser les Replica Sets
+--------------------------------
 
-### A) Initialiser les Config Servers (cfgRS)
+Initialiser :
 
-    docker exec -it cfg1 mongosh --port 27019
+*   Config Server RS
+    
+*   Shard 1 RS
+    
+*   Shard 2 RS
     
 
-Puis :
-
-    rs.initiate({
-      _id: "cfgRS",
-      configsvr: true,
-      members: [
-        { _id: 0, host: "cfg1:27019" },
-        { _id: 1, host: "cfg2:27019" },
-        { _id: 2, host: "cfg3:27019" }
-      ]
-    })
-    rs.status()
-    
-
-Quitter :
-
-    exit
-    
+Puis ajouter les shards au routeur `mongos`.
 
 * * *
 
-### B) Initialiser le Shard 1 (shard1RS)
+🧪 Test de Scalabilité
+======================
 
-    docker exec -it shard1a mongosh --port 27018
-    
-
-    rs.initiate({
-      _id: "shard1RS",
-      members: [
-        { _id: 0, host: "shard1a:27018" },
-        { _id: 1, host: "shard1b:27018" },
-        { _id: 2, host: "shard1c:27018" }
-      ]
-    })
-    rs.status()
-    
-
-    exit
-    
-
-* * *
-
-### C) Initialiser le Shard 2 (shard2RS)
-
-    docker exec -it shard2a mongosh --port 27018
-    
-
-    rs.initiate({
-      _id: "shard2RS",
-      members: [
-        { _id: 0, host: "shard2a:27018" },
-        { _id: 1, host: "shard2b:27018" },
-        { _id: 2, host: "shard2c:27018" }
-      ]
-    })
-    rs.status()
-    
-
-    exit
-    
-
-* * *
-
-🔌 Ajouter les shards au routeur mongos
----------------------------------------
-
-Connexion au `mongos` :
-
-    docker exec -it mongos mongosh --port 27017
-    
-
-Ajout des shards :
-
-    sh.addShard("shard1RS/shard1a:27018,shard1b:27018,shard1c:27018")
-    sh.addShard("shard2RS/shard2a:27018,shard2b:27018,shard2c:27018")
-    sh.status()
-    
-
-* * *
-
-🧠 Activer le sharding + sharder une collection
------------------------------------------------
-
-Toujours dans `mongos` :
-
-### 1) Activer le sharding sur la base
-
-    sh.enableSharding("labdb")
-    
-
-### 2) Créer un index sur la clé de sharding
-
-Exemple : sharding par `userId`
-
-    db = db.getSiblingDB("labdb")
-    db.users.createIndex({ userId: 1 })
-    
-
-### 3) Sharder la collection
-
-    sh.shardCollection("labdb.users", { userId: 1 })
-    sh.status()
-    
-
-* * *
-
-🧪 Test : insertion + distribution des données
-----------------------------------------------
-
-Toujours dans `mongos` :
+Insertion de 2000 documents :
 
     db.users.insertMany(
       Array.from({length: 2000}, (_,i)=>({ userId: i, name: "u"+i }))
     )
     
-    db.users.countDocuments()
-    db.users.getShardDistribution()
-    
 
-✅ Tu devrais voir une répartition des documents entre les shards.
-
-* * *
-
-🔍 Commandes utiles
--------------------
-
-### État global du sharding
-
-    sh.status()
-    
-
-### Vérifier la distribution
+Vérification :
 
     db.users.getShardDistribution()
     
 
-### Vérifier les chunks
-
-    use config
-    db.chunks.find({ ns: "labdb.users" }).limit(5)
-    
+Résultat : répartition automatique des données entre les shards.
 
 * * *
 
-🧹 Arrêt et nettoyage
----------------------
+📊 Concepts Démontrés
+=====================
 
-### Stopper le cluster
+Concept
 
-    docker compose down
-    
+Explication
 
-### Stopper + supprimer les volumes (reset total)
+Scalabilité horizontale
 
-    docker compose down -v
-    
+Ajout de shards pour distribuer la charge
 
-* * *
+Haute disponibilité
 
-🛠️ Dépannage (problèmes fréquents)
------------------------------------
+Replica Sets avec Primary + Secondaries
 
-### 1) `mongos` ne démarre pas / configdb inaccessible
+Partitionnement des données
 
-*   Assure-toi d’avoir initialisé `cfgRS` avant de tester `mongos`
-    
-*   Redémarre :
-    
+Distribution par clé de sharding
 
-    docker compose restart mongos
-    
+Architecture distribuée
 
-### 2) `rs.initiate()` échoue
-
-*   Attends 5–10 secondes après `docker compose up -d`
-    
-*   Vérifie que les conteneurs sont `Up` :
-    
-
-    docker ps
-    
-
-### 3) Pas de distribution équilibrée
-
-*   Avec une clé **range** `{ userId: 1 }`, la distribution dépend des chunks.
-    
-*   Tu peux tester une clé **hashed** (meilleure distribution) :
-    
-
-    db.users.createIndex({ userId: "hashed" })
-    sh.shardCollection("labdb.users", { userId: "hashed" })
-    
+Séparation Config / Shards / Router
 
 * * *
 
-📁 Structure du projet (exemple)
---------------------------------
+📁 Structure du Projet
+======================
 
-    .
+    mongo-sharding-docker/
+    │
     ├── docker-compose.yml
     └── README.md
     
 
 * * *
 
-📜 Licence
-----------
+🎯 Compétences Démontrées
+=========================
 
-Choisis la licence que tu veux (ex: MIT) et ajoute un fichier `LICENSE`.
+*   Architecture de bases de données distribuées
+    
+*   Conception de systèmes scalables
+    
+*   Conteneurisation avancée avec Docker
+    
+*   Orchestration multi-services
+    
+*   Manipulation avancée de MongoDB
+    
 
 * * *
 
-✅ Résultat
-----------
+📜 Licence
+==========
 
-Tu obtiens un cluster MongoDB shardé fonctionnel, idéal pour apprendre :
+MIT License
 
-*   Sharding
     
-*   Replica Sets
-    
-*   Haute disponibilité
-    
-*   Scalabilité horizontale
-    
-
+    ---
     
     Si tu veux, je peux aussi te donner :
-    - un **diagramme Mermaid** de l’architecture (parfait pour ton README),
-    - une version **avec authentification (keyFile + users)**,
-    - et une version “script automatique” qui initialise tout en une seule commande.
+    
+    - 🔥 Une version encore plus “Cloud Engineer / DevOps style”
+    - 📊 Un diagramme d’architecture en Mermaid
+    - 🎨 Une version README premium avec badges (Docker, MongoDB, etc.)
+    - 🚀 Une version prête pour impression recruteur
+    
+    Dis-moi ce que tu préfères 😎
