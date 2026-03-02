@@ -19,12 +19,12 @@
  Ce laboratoire a pour but de :
     
    - Comprendre le fonctionnement du **Sharding MongoDB**
-    - Implémenter des **Replica Sets**
-    - Simuler une **architecture distribuée**
-    - Expérimenter la **scalabilité horizontale**
-    - Observer la répartition des données entre plusieurs shards
+   - Implémenter des **Replica Sets**
+   - Simuler une **architecture distribuée**
+   - Expérimenter la **scalabilité horizontale**
+   - Observer la répartition des données entre plusieurs shards
     
-    ---
+   ---
     
    # 🛠️ Stack Technique
     
