@@ -53,18 +53,21 @@
 | <img src="https://cdn.simpleicons.org/mongodb" width="20"/> **Shard 1 (shard1RS)** | 3 | 27018 | Données shard 1 |
 | <img src="https://cdn.simpleicons.org/mongodb" width="20"/> **Shard 2 (shard2RS)** | 3 | 27018 | Données shard 2 |
 | <img src="https://cdn.simpleicons.org/nginx" width="20"/> **mongos Router** | 1 | 27017 | Point d’entrée du cluster |
-    ---
     
-    # 📦 Fonctionnalités Implémentées
+---
     
-    | Fonctionnalité | Description |
-    |---------------|------------|
-    | Replica Sets | Chaque shard est configuré en Replica Set (3 membres) |
-    | Config Server RS | Replica Set dédié aux métadonnées |
-    | Ajout dynamique de shards | Utilisation de `sh.addShard()` |
-    | Activation du sharding | `sh.enableSharding()` |
-    | Sharding d’une collection | `sh.shardCollection()` |
-    | Test de distribution | `getShardDistribution()` |
+
+    
+  ## 📦 Fonctionnalités Implémentées
+
+| Fonctionnalité | Description |
+|---------------|------------|
+| <img src="https://cdn.simpleicons.org/mongodb" width="20"/> **Replica Sets** | Chaque shard est configuré en Replica Set (3 membres) |
+| <img src="https://cdn.simpleicons.org/mongodb" width="20"/> **Config Server RS** | Replica Set dédié aux métadonnées |
+| <img src="https://cdn.simpleicons.org/mongodb" width="20"/> **Ajout dynamique de shards** | Utilisation de `sh.addShard()` |
+| <img src="https://cdn.simpleicons.org/mongodb" width="20"/> **Activation du sharding** | `sh.enableSharding()` |
+| <img src="https://cdn.simpleicons.org/mongodb" width="20"/> **Sharding d’une collection** | `sh.shardCollection()` |
+| <img src="https://cdn.simpleicons.org/mongodb" width="20"/> **Test de distribution** | `getShardDistribution()` |
     
     ---
     
