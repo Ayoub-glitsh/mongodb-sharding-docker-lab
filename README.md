@@ -75,9 +75,9 @@
     
    ## 1️⃣ Lancer le cluster
     
-    ```bash
+   ```bash
     docker compose up -d
-    ```
+   ```
 
 Vérifier :
 
