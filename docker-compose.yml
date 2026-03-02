@@ -1,0 +1,103 @@
+services:
+  # -------------------------
+  # Config Server Replica Set
+  # -------------------------
+  cfg1:
+    image: mongo:7
+    container_name: cfg1
+    command: ["mongod","--configsvr","--replSet","cfgRS","--port","27019","--bind_ip_all"]
+    ports: ["27019:27019"]
+    networks: [mongo-net]
+    volumes: [cfg1:/data/db]
+
+  cfg2:
+    image: mongo:7
+    container_name: cfg2
+    command: ["mongod","--configsvr","--replSet","cfgRS","--port","27019","--bind_ip_all"]
+    networks: [mongo-net]
+    volumes: [cfg2:/data/db]
+
+  cfg3:
+    image: mongo:7
+    container_name: cfg3
+    command: ["mongod","--configsvr","--replSet","cfgRS","--port","27019","--bind_ip_all"]
+    networks: [mongo-net]
+    volumes: [cfg3:/data/db]
+
+  # -------------------------
+  # Shard 1 Replica Set
+  # -------------------------
+  shard1a:
+    image: mongo:7
+    container_name: shard1a
+    command: ["mongod","--shardsvr","--replSet","shard1RS","--port","27018","--bind_ip_all"]
+    networks: [mongo-net]
+    volumes: [s1a:/data/db]
+
+  shard1b:
+    image: mongo:7
+    container_name: shard1b
+    command: ["mongod","--shardsvr","--replSet","shard1RS","--port","27018","--bind_ip_all"]
+    networks: [mongo-net]
+    volumes: [s1b:/data/db]
+
+  shard1c:
+    image: mongo:7
+    container_name: shard1c
+    command: ["mongod","--shardsvr","--replSet","shard1RS","--port","27018","--bind_ip_all"]
+    networks: [mongo-net]
+    volumes: [s1c:/data/db]
+
+  # -------------------------
+  # Shard 2 Replica Set
+  # -------------------------
+  shard2a:
+    image: mongo:7
+    container_name: shard2a
+    command: ["mongod","--shardsvr","--replSet","shard2RS","--port","27018","--bind_ip_all"]
+    networks: [mongo-net]
+    volumes: [s2a:/data/db]
+
+  shard2b:
+    image: mongo:7
+    container_name: shard2b
+    command: ["mongod","--shardsvr","--replSet","shard2RS","--port","27018","--bind_ip_all"]
+    networks: [mongo-net]
+    volumes: [s2b:/data/db]
+
+  shard2c:
+    image: mongo:7
+    container_name: shard2c
+    command: ["mongod","--shardsvr","--replSet","shard2RS","--port","27018","--bind_ip_all"]
+    networks: [mongo-net]
+    volumes: [s2c:/data/db]
+
+  # -------------------------
+  # Mongos Router
+  # -------------------------
+  mongos:
+    image: mongo:7
+    container_name: mongos
+    depends_on:
+      - cfg1
+      - cfg2
+      - cfg3
+      - shard1a
+      - shard2a
+    command: ["mongos","--configdb","cfgRS/cfg1:27019,cfg2:27019,cfg3:27019","--bind_ip_all","--port","27017"]
+    ports: ["27017:27017"]
+    networks: [mongo-net]
+
+networks:
+  mongo-net:
+
+volumes:
+  cfg1: {}
+  cfg2: {}
+  cfg3: {}
+  s1a: {}
+  s1b: {}
+  s1c: {}
+  s2a: {}
+  s2b: {}
+  s2c: {}
