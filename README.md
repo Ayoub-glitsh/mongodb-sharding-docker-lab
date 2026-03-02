@@ -13,6 +13,12 @@
 </p>
 
 
+
+<p align="center">
+  <img src="assets/pic_06.png" alt="MongoDB Sharded Cluster Architecture" width="700"/>
+</p>
+
+
    # 🧩 MongoDB Sharded Cluster Simulation with Docker
     
    Ce projet met en place une **simulation complète d’un cluster MongoDB shardé** en utilisant Docker Compose.  
