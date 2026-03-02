@@ -1,4 +1,6 @@
-
+<p align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=26&duration=2500&pause=800&center=true&vCenter=true&width=900&lines=Ton_Titre_Ici" alt="Typing SVG" />
+</p>
 
 
    # 🧩 MongoDB Sharded Cluster Simulation with Docker
