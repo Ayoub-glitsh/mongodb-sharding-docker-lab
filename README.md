@@ -190,13 +190,14 @@ Résultat : répartition automatique des données entre les shards.
 📜 Licence
 ==========
 
+MIT License
+
+    
+---
+
 
 <p align="center">
   <img src="assets/image.jpeg" width="600"/>
 </p>
 
-MIT License
-
-    
----
    
