@@ -69,15 +69,15 @@
 | <img src="https://cdn.simpleicons.org/mongodb" width="20"/> **Sharding d’une collection** | `sh.shardCollection()` |
 | <img src="https://cdn.simpleicons.org/mongodb" width="20"/> **Test de distribution** | `getShardDistribution()` |
     
-    ---
+   ---
     
-    # ⚙️ Déploiement
+   # ⚙️ Déploiement
     
-    ## 1️⃣ Lancer le cluster
+   ## 1️⃣ Lancer le cluster
     
     ```bash
     docker compose up -d
-    
+    ```
 
 Vérifier :
 
@@ -179,13 +179,5 @@ Séparation Config / Shards / Router
 MIT License
 
     
-    ---
-    
-    Si tu veux, je peux aussi te donner :
-    
-    - 🔥 Une version encore plus “Cloud Engineer / DevOps style”
-    - 📊 Un diagramme d’architecture en Mermaid
-    - 🎨 Une version README premium avec badges (Docker, MongoDB, etc.)
-    - 🚀 Une version prête pour impression recruteur
-    
-    Dis-moi ce que tu préfères 😎
+---
+   
