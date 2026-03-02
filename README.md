@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=26&duration=2500&pause=800&center=true&vCenter=true&width=900&lines=Ton_Titre_Ici" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=26&duration=2500&pause=800&center=true&vCenter=true&width=1000&lines=MongoDB+Sharded+Cluster+Simulation+with+Docker" alt="Typing SVG" />
 </p>
 
 
